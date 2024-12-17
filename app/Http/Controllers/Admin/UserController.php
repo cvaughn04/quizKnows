@@ -14,4 +14,28 @@ class UserController extends Controller
 
         return $users;
     }
+
+    public function insert(Request $request) {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'admin' => $request->admin,
+        ]);
+
+        return response()->json($user);
+    }
+
+    public function deleteByEmail(Request $request) {
+        $user = User::where([
+            'email' => $request->email,
+        ]);
+        if ($user) {
+            $user->delete();
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

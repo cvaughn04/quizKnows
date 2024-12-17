@@ -14,4 +14,9 @@ Route::get('/', function () {
 // });
 Route::get('api/users', [UserController::class, 'index']);
 
+Route::post('api/addDummyUser', [UserController::class, 'insert']);
+Route::post('api/deleteDummyUser', [UserController::class, 'deleteByEmail']);
+
+
+
 Route::get('{view}', ApplicationController::class)->where('view', '(.*)');

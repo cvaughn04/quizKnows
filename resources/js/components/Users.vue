@@ -11,9 +11,35 @@ const getUsers = () => {
     }) 
 }
 
+const addDummyUser = () => {
+    axios.post('/api/addDummyUser', {
+        name: "dummy",
+        email: "dummy@example.com",
+        password: "temppass",
+        admin: 0,
+    })
+    .then((response) => {
+        users.value.push(response.data);
+    }) 
+}
+
+const deleteDummyUser = () => {
+    axios.post('/api/deleteDummyUser', {
+        email: "dummy@example.com",
+    })
+    .then((response) => {
+      if (response.data == true) {
+        getUsers();
+      } else {
+        alert("No dummy user");
+
+      }
+    }) 
+}
+
 onMounted(() => {
     getUsers();
-})
+});
 </script>
 
 <template>
@@ -22,22 +48,29 @@ onMounted(() => {
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Users</h1>
-          </div><!-- /.col -->
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
               <li class="breadcrumb-item active">Users</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
 
     <div class="content">
       <div class="container-fluid">
         <div class="card">
             <div class="card-body">
+                <div class="mb-3">
+                    <!-- Button to trigger a function -->
+                    <button @click="getUsers" class="btn btn-primary">Refresh Users</button>
+                    
+                    <button @click="addDummyUser" class="btn btn-primary">Add Dummy User</button>
+
+                    <button @click="deleteDummyUser" class="btn btn-secondary">Delete Dummy User</button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -46,7 +79,6 @@ onMounted(() => {
                             <th>Email</th>
                             <th>Registered Date</th>
                             <th>Role</th>
-                            <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,18 +86,13 @@ onMounted(() => {
                             <td>{{index + 1}}</td>
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td>{{user.created_at}}</td>
+                            <td>{{user.admin == 1 ? "Admin" : "User"}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    
-        </div>
       </div>
-
-    
-
+    </div>
 </template>
