@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>QuizKnows</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
         :root {
             /* Atlassian Design Colors */
             --background-color: #ffffff;
@@ -117,12 +112,21 @@
             text-decoration: underline;
         }
     </style>
-    </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+</head>
+<body>
     <div class="login-container">
-        <h1>Login</h1>
-        <form>
-            <label for="email">Email</label>
+    <h2>Login</h2>
+
+@if($errors->any())
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+    <form action="{{ url('login') }}" method="POST">
+        @csrf
+        <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
             <label for="password">Password</label>
@@ -133,7 +137,9 @@
             <div class="footer">
                 <p>Don't have an account? <a href="dashboard">Sign up</a></p>
             </div>
-        </form>
+    </form>
     </div>
-    </body>
+
+    
+</body>
 </html>
