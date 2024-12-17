@@ -1,3 +1,11 @@
+<?php
+  $user = Auth::user();
+
+  $name = $user->name;
+  $email = $user->email;
+  $admin = $user->admin;
+
+?>
 
 <!DOCTYPE html>
 <!--
@@ -114,10 +122,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="https://static.wikitide.net/atrociousgameplaywiki/c/cd/Alien_Portrait.png" class="img-circle elevation-2" alt="User Image">
+          <img src="https://static.wikia.nocookie.net/aliens/images/2/27/Alien_Hominid.jpg" class="img-circle elevation-2" alt="User Image" style="aspect-ratio: 1/1; object-fit: cover; object-position: center;">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Username</a>
+          <a href="account" class="d-block">{{$name}}
+            <?php if ($admin == 1): ?>
+              <i class="nav-icon fas fa-user-shield" style="margin-left: 5px;"></i>
+            <?php endif; ?>
+          </a>
+          
+
+          <!-- <a href="#" class="d-block">{{$email}}</a> -->
+
         </div>
       </div>
 
@@ -179,15 +195,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="users" class="nav-link">
-              <i class="nav-icon fas fa-users-cog"></i>
-              <p>
-                Admin: Users
-                <!-- <span class="right badge badge-danger">New</span> -->
-              </p>
-            </a>
-          </li>
+          <?php if ($admin == 1): ?>
+            <li class="nav-item">
+              <a href="users" class="nav-link">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p>
+                  Admin: Users
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+          <?php endif; ?>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
