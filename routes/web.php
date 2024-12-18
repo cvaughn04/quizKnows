@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DeckController;
+
 
 
 
@@ -24,6 +26,12 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 
 // Handle login form submission
 Route::post('login', [LoginController::class, 'login']);
+
+Route::get('/api/getAuth', function () {
+    return Auth::user();
+})->middleware('auth');
+
+Route::get('api/decks', [DeckController::class, 'getDecksByID']);
 
 
 Route::get('{view}', ApplicationController::class)->where('view', '(.*)');
