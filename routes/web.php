@@ -32,6 +32,8 @@ Route::get('/api/getAuth', function () {
 })->middleware('auth');
 
 Route::get('api/decks', [DeckController::class, 'getDecksByID']);
+Route::get('api/getDeck', [DeckController::class, 'getDeckByDeckID']);
+
 Route::post('api/addDeck', [DeckController::class, 'insertDeck']);
 Route::post('api/deleteDeck', [DeckController::class, 'deleteDeckById']);
 

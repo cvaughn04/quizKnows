@@ -2,6 +2,8 @@ import Dashboard from './components/Dashboard.vue';
 import StudySets from './components/StudySets.vue';
 import Users from './components/Users.vue';
 import Account from './components/Account.vue';
+import ViewDeck from './components/ViewDeck.vue';
+
 
 
 
@@ -17,6 +19,12 @@ export default [
         name: 'studysets',
         component: StudySets,
     }, 
+    {
+        path: '/studysets/:id',
+        name: 'viewDeck',
+        component: ViewDeck,
+        props: true, // Pass route params as props
+    },
 
     {
         path: '/users',
@@ -29,4 +37,5 @@ export default [
         name: 'account',
         component: Account,
     }
+
 ]

@@ -36,7 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="dashboard" class="nav-link">Home</a>
+        <a href="/dashboard" class="nav-link">Home</a>
       </li>
       <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="dashboard" class="brand-link">
+    <a href="/dashboard" class="brand-link">
       <img src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">QuizKnows</span>
     </a>
@@ -125,7 +125,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="https://static.wikia.nocookie.net/aliens/images/2/27/Alien_Hominid.jpg" class="img-circle elevation-2" alt="User Image" style="aspect-ratio: 1/1; object-fit: cover; object-position: center;">
         </div>
         <div class="info">
-          <a href="account" class="d-block">{{$name}}
+          <a href="/account" class="d-block">{{$name}}
             <?php if ($admin == 1): ?>
               <i class="nav-icon fas fa-user-shield" style="margin-left: 5px;"></i>
             <?php endif; ?>
@@ -156,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
      
           <li class="nav-item">
-            <a href="dashboard" class="nav-link">
+            <a href="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Dashboard
@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           
           <li class="nav-item">
-            <a href="studysets" class="nav-link">
+            <a href="/studysets" class="nav-link">
               <i class="nav-icon fas fa-sticky-note"></i>
               <p>
                 Study Sets
@@ -176,7 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
-            <a href="account" class="nav-link">
+            <a href="/account" class="nav-link">
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Account
@@ -197,7 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <?php if ($admin == 1): ?>
             <li class="nav-item">
-              <a href="users" class="nav-link">
+              <a href="/users" class="nav-link">
                 <i class="nav-icon fas fa-users-cog"></i>
                 <p>
                   Admin: Users

@@ -18,6 +18,15 @@ class DeckController extends Controller
         return response()->json($decks);
     }
 
+    public function getDeckByDeckID(Request $request)
+    {
+        // Use first() instead of get() to return a single deck
+        $deck = Deck::where('id', $request->id)->first();
+        
+        // Return the deck as a JSON response
+        return response()->json($deck);
+    }
+
     public function insertDeck(Request $request) {
         $deck = Deck::create([
             'title' => $request->title,

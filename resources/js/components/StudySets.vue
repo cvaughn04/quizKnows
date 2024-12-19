@@ -78,7 +78,7 @@ onMounted(() => {
           
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+              <li class="breadcrumb-item"><router-link to="/dashboard">Home</router-link></li>
               <li class="breadcrumb-item active">Study Sets</li>
             </ol>
           </div><!-- /.col -->
@@ -108,7 +108,11 @@ onMounted(() => {
             </div>
             <div class="card-body">
               <p class="card-text">{{ deck.description }}</p>
-              <a href="#" class="btn btn-primary">View Deck</a>
+              <router-link 
+                :to="{ name: 'viewDeck', params: { id: deck.id } }" 
+                class="btn btn-primary">
+                View Deck
+              </router-link>            
             </div>
           </div>
           
