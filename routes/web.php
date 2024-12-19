@@ -42,6 +42,8 @@ Route::post('api/deleteDeck', [DeckController::class, 'deleteDeckById']);
 
 Route::get('api/cards', [CardController::class, 'getCardsByDeckId']);
 Route::post('api/addCard', [CardController::class, 'insertCard']);
+Route::post('api/deleteCard', [CardController::class, 'deleteCardById']);
+
 
 
 

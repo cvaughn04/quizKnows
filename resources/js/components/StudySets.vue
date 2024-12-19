@@ -96,15 +96,16 @@ onMounted(() => {
         <!-- Loop through decks -->
         <div class="col-lg-4" v-for="deck in decks" :key="deck.id">
           <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5 class="m-0">{{ deck.title }}</h5>
-              <button
-                class="btn btn-outline-danger btn-sm"
-                style="margin-left: 60%"
-                @click="deleteDeck(deck.id)"
-              >
-                <i :class="'fas fa-trash-alt'"></i>
-              </button>
+            <div class="card-header">
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <h5 class="m-0">{{ deck.title }}</h5>
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  @click="deleteDeck(deck.id)"
+                >
+                  <i :class="'fas fa-trash-alt'"></i>
+                </button>
+              </div>
             </div>
             <div class="card-body">
               <p class="card-text">{{ deck.description }}</p>

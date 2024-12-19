@@ -49,6 +49,27 @@ const addNewCard = (deckId) => {
   })
 }
 
+const deleteCard = (deckId, cardId, event) => {
+    // Prevent card flip
+    if (event) {
+        event.stopPropagation();
+    }
+
+    axios.post('/api/deleteCard', {
+        id: cardId,
+        deckId: deckId,
+    })
+    .then((response) => {
+        if (response.data == true) {
+            cards.value = cards.value.filter(item => item.id !== cardId);
+            // Adjust currentCardIndex if necessary
+            if (currentCardIndex.value >= cards.value.length) {
+                currentCardIndex.value = Math.max(0, cards.value.length - 1);
+            }
+        }
+    });
+}
+
 
 
 
@@ -124,6 +145,12 @@ getDeck(deckId.value);
                 @click="flipCard"
               >
                 <div class="flashcard-inner">
+                  <div class="card-actions">
+                    <button class="action-button"  @click="editCard()"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="action-button" @click="(event) => deleteCard(deck.id, currentCard.id, event)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
                   <div class="flashcard-front">
                     <div class="card-content">{{ currentCard.front }}</div>
                   </div>
@@ -271,6 +298,33 @@ getDeck(deckId.value);
 
 .flashcard:hover .flashcard-inner {
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  transition: transform 0.6s;
+}
+
+.flashcard.is-flipped .card-actions {
+  display: none;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.action-button:hover {
+  color: #495057;
 }
 </style>
   
