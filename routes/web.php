@@ -32,6 +32,8 @@ Route::get('/api/getAuth', function () {
 })->middleware('auth');
 
 Route::get('api/decks', [DeckController::class, 'getDecksByID']);
+Route::post('api/addDeck', [DeckController::class, 'insertDeck']);
+
 
 
 Route::get('{view}', ApplicationController::class)->where('view', '(.*)');

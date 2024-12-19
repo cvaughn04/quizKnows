@@ -17,5 +17,15 @@ class DeckController extends Controller
         // Return the decks as a JSON response
         return response()->json($decks);
     }
+
+    public function insertDeck(Request $request) {
+        $deck = Deck::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'userId' => $request->userId,
+        ]);
+
+        return response()->json($deck);
+    }
     //
 }

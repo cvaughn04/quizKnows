@@ -22,8 +22,22 @@ const getDecks = (userId) => {
     }) 
 }
 
+const newDeckTitle = ref("");
+const newDeckDescription = ref("");
 
 const addNewDeck = () => {
+
+
+    axios.post('/api/addDeck', {
+        title: newDeckTitle.value,
+        description: newDeckDescription.value,
+        userId: user.value.id,
+    })
+    .then((response) => {
+        decks.value.push(response.data);
+        newDeckTitle.value = "";
+        newDeckDescription.value = "";
+    })
     
 }
 
@@ -47,8 +61,12 @@ onMounted(() => {
               <div class="row mb-2">
                 <h1 class="m-0" style="padding-left: 10px;">Study Sets</h1>
                 <!-- <button @click="getUsers" class="btn btn-primary" style="margin-left: 20px;">Refresh Decks</button>  -->
-                <button @click="addNewDeck" class="btn btn-primary" style="margin-left: 10px;">New Deck</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDeckModal" style="margin-left: 20px;">
+                    <i :class="'fas fa-folder-plus'"></i>
+                    &nbsp;Create New Deck
+                  </button>
               </div>
+              
           </div><!-- /.col -->
           
           <div class="col-sm-6">
@@ -75,7 +93,7 @@ onMounted(() => {
               <h5 class="m-0">{{ deck.title }}</h5>
               <button
                 class="btn btn-outline-danger btn-sm"
-                style=""
+                style="margin-left: 60%"
                 @click="deleteDeck(deck.id)"
               >
                 <i :class="'fas fa-trash-alt'"></i>
@@ -91,6 +109,43 @@ onMounted(() => {
       </div>
     </div>
   </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="addDeckModal" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Create New Deck</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control " id="title"
+                                aria-describedby="nameHelp" placeholder="Untitiled" v-model="newDeckTitle">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" v-model="newDeckDescription" id="description" name="description" placeholder="Enter text..."></textarea><br>
+
+                        </div>
+                    </form>
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+                    <button @click="addNewDeck()" type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
       
       
     

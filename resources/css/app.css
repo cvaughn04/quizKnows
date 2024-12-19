@@ -8,3 +8,7 @@
     /* background-color: #352C63; */
 }
 
+.card-header {
+    justify-content: space-between;
+}
+
