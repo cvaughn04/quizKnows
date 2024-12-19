@@ -5,6 +5,8 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\CardController;
+
 
 
 
@@ -38,6 +40,7 @@ Route::post('api/addDeck', [DeckController::class, 'insertDeck']);
 Route::post('api/deleteDeck', [DeckController::class, 'deleteDeckById']);
 
 
+Route::get('api/cards', [CardController::class, 'getCardsByDeckId']);
 
 
 Route::get('{view}', ApplicationController::class)->where('view', '(.*)');

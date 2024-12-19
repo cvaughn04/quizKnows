@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deck extends Model
+class Card extends Model
 {
     public $timestamps = false;
 
@@ -15,17 +15,12 @@ class Deck extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'title',
-        'description',
-        'userId',
+        'front',
+        'back',
+        'deckId',
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function deck() {
+        return $this->belongsTo(Deck::class);
     }
-
-    public function cards() {
-        return $this->hasMany(Card::class);
-    }
-    
 }
