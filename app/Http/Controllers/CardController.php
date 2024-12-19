@@ -23,4 +23,18 @@ class CardController extends Controller
 
         return response()->json($card);
     }
+
+    public function deleteCardById(Request $request) {
+        $card = Card::where([
+            'id' => $request->id,
+            'deckId' => $request->deckId,
+        ]);
+        if ($card) {
+            $card->delete();
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
