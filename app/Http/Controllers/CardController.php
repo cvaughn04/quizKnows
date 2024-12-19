@@ -13,4 +13,14 @@ class CardController extends Controller
         $cards = Card::where('deckId', $request->id)->get();
         return response()->json($cards);
     }
+
+    public function insertCard(Request $request) {
+        $card = Card::create([
+            'front' => $request->front,
+            'back' => $request->back,
+            'deckId' => $request->deckId,
+        ]);
+
+        return response()->json($card);
+    }
 }

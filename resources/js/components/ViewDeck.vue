@@ -33,11 +33,30 @@ const getCards = (id) => {
     });
 };
 
-// Computed properties
+const newCardFront = ref("");
+const newCardBack = ref("");
+
+const addNewCard = (deckId) => {
+  axios.post('/api/addCard', {
+      front: newCardFront.value,
+      back: newCardBack.value,
+      deckId: deckId,
+  })
+  .then((response) => {
+      cards.value.push(response.data);
+      newCardFront.value = "";
+      newCardBack.value = "";
+  })
+}
+
+
+
+
+
+
 const currentCard = computed(() => cards.value[currentCardIndex.value] || null);
 const totalCards = computed(() => cards.value.length);
 
-// Card functions
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
 };
@@ -67,9 +86,13 @@ getDeck(deckId.value);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0" v-if="deck">Viewing Deck: {{ deck.title }}</h1>
+            <h1 class="m-0" v-if="deck">Viewing Deck: {{ deck.title }} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCardModal" style="margin-left: 20px;">
+                    <i :class="'fas fa-file-medical'"></i>
+                    &nbsp;Add Card
+                  </button>
+            </h1>
             <p v-else>Loading deck details...</p>
-          </div>
+          </div>                  
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><router-link to="/dashboard">Home</router-link></li>
@@ -131,6 +154,46 @@ getDeck(deckId.value);
       </div>
     </div>
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addCardModal" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add a card</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off">
+                      <div class="form-group">
+                            <label for="front">Front Side</label>
+                            <textarea class="form-control" v-model="newCardFront" id="front" name="front" placeholder="Enter text..."></textarea><br>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="back">Back Side</label>
+                            <textarea class="form-control" v-model="newCardBack" id="back" name="back" placeholder="Enter text..."></textarea><br>
+
+                        </div>
+                    </form>
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button @click="addNewCard(deck.id)" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </template>
 
 <style scoped>
