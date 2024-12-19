@@ -42,9 +42,16 @@ const addNewDeck = () => {
 }
 
 const deleteDeck = (deckId) => {
-    axios.post('/api/deleteDeck', { params: { id: deckId } })
+    axios.post('/api/deleteDeck', {
+        id: deckId,
+        userId: user.value.id,
+    })
     .then((response) => {
-     
+      if (response.data == true) {
+          decks.value = decks.value.filter(item => item.id !== deckId);
+      } else {
+        
+      }
     }) 
 }
 

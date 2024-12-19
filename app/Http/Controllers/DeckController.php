@@ -27,5 +27,19 @@ class DeckController extends Controller
 
         return response()->json($deck);
     }
+
+    public function deleteDeckById(Request $request) {
+        $deck = Deck::where([
+            'id' => $request->id,
+            'userId' => $request->userId,
+        ]);
+        if ($deck) {
+            $deck->delete();
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     //
 }
